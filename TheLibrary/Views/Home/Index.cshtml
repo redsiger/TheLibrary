@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TheLibrary.Models.Book>
+@{
+    ViewBag.Title = "Список книг";
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Библиотека</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+    <h2>@ViewBag.Title</h2>
+    <table>
+        <tr>
+            <td>Название</td>
+            <td>Автор</td>
+            <td>Жанр</td>
+            <td>Издатель</td>
+            <td>В наличии</td>
+            <td>Забронировано</td>
+        </tr>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Name</td>
+                <td>@book.Author</td>
+                <td>@book.Genre</td>
+                <td>@book.Publisher</td>
+                <td>@book.IsAvaliable</td>
+                <td>@book.IsBooked</td>
+                @if (book.IsAvaliable)
+                {
+                    <td><a href="~/Views/Home/Buy/@book.Id">Забронировать</a> </td>
+                }
+            </tr>
+        }
+    </table>
+</body>
+
+</html>
