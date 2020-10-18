@@ -14,7 +14,9 @@ namespace TheLibrary
                     {
                         Name = "Мастер и Маргарита",
                         Author = "Булгаков М.А.",
-                        Genre = "роман"
+                        Genre = "роман",
+                        IsBooked = false,
+                        IsAvaliable = true
                     }
                 );
                 context.SaveChanges();

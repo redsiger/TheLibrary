@@ -1,44 +1,40 @@
 ﻿@model IEnumerable<TheLibrary.Models.Book>
 @{
-    ViewBag.Title = "Список книг";
-    Layout = null;
+    ViewData["Title"] = "Список книг библиотеки";
 }
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Библиотека</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width">
-</head>
-
-<body>
-    <h2>@ViewBag.Title</h2>
-    <table>
+<h2>Книжки</h2>
+<table class="table-bordered">
+    <tr>
+        <td>Название</td>
+        <td>Автор</td>
+        <td>Жанр</td>
+        <td>Издатель</td>
+        <td>В наличии</td>
+        <td>Забронировано</td>
+    </tr>
+    @foreach (var book in Model)
+    {
         <tr>
-            <td>Название</td>
-            <td>Автор</td>
-            <td>Жанр</td>
-            <td>Издатель</td>
-            <td>В наличии</td>
-            <td>Забронировано</td>
+            <td>@book.Name</td>
+            <td>@book.Author</td>
+            <td>@book.Genre</td>
+            <td>@book.Publisher</td>
+            @if (book.IsAvaliable)
+            {
+                <td>В библиотеке</td>
+            }
+            else
+            {
+                <td>На руках</td>
+            }
+            @if (!book.IsBooked)
+            {
+                <td><a href="~/Home/ToBook/@book.Id">Забронировать</a> </td>
+            }
+            else
+            {
+                <td>Недоступно для бронирования</td>
+            }
         </tr>
-        @foreach (var book in Model)
-        {
-            <tr>
-                <td>@book.Name</td>
-                <td>@book.Author</td>
-                <td>@book.Genre</td>
-                <td>@book.Publisher</td>
-                <td>@book.IsAvaliable</td>
-                <td>@book.IsBooked</td>
-                @if (book.IsAvaliable)
-                {
-                    <td><a href="~/Views/Home/Buy/@book.Id">Забронировать</a> </td>
-                }
-            </tr>
-        }
-    </table>
-</body>
-
-</html>
+    }
+</table>

@@ -19,5 +19,21 @@ namespace TheLibrary.Controllers
         {
             return View(db.Books.ToList());
         }
+
+        [HttpGet]
+        public IActionResult ToBook(int? id)
+        {
+            if (id == null) return RedirectToAction("Index");
+            ViewBag.BookId = id;
+            return View();
+        }
+        [HttpPost]
+        public string ToBook(Order order)
+        {
+            db.Orders.Add(order);
+            // сохраняем в бд все изменения
+            db.SaveChanges();
+            return "Книга успешно забронирована";
+        }
     }
 }
